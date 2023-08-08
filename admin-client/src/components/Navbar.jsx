@@ -9,21 +9,18 @@ export default function DropdownComponent() {
                     <img src={imgUrl} />
                 </div>
                 <div className="mr-4">
-                    COFFEE
+                    Dashboard
                 </div>
                 <div className="relative w-[90px]">
                     <select className=" text-white bg-transparent rounded-md shadow-sm appearance-none outline-none focus:border-green-800 ">
-                        <option className="text-green-800">MENU</option>
+                        <option className="text-green-800">Categories</option>
                         <option className="text-green-800">BEVERAGES</option>
                         <option className="text-green-800">FOOD</option>
                         <option className="text-green-800">MERCHANDISE</option>
                     </select>
                 </div>
                 <div className="mr-4">
-                    STARBUCKS REWARDS
-                </div>
-                <div className="mr-4">
-                    PROMO
+                    Register Admin
                 </div>
             </div>
             <div className="flex text-white m-3 gap-3">
@@ -32,6 +29,9 @@ export default function DropdownComponent() {
                 </div>
                 <div className="mr-4">
                     Register
+                </div>
+                <div className="mr-4">
+                    Logout
                 </div>
             </div>
         </div>
