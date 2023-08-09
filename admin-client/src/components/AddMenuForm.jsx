@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { addMenu } from "../store/action/actionCreator";
+import { useDispatch } from "react-redux";
 
 export default function AddMenuForm() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [addForm, setAddForm] = useState({
     name: "",
     description: "",
@@ -22,13 +26,12 @@ export default function AddMenuForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const body = { handleChange };
-
-    await fetch("http://localhost:3000/items", {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body),
-    });
+    try {
+      await dispatch(addMenu(addForm))
+      navigate("/");
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (

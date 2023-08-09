@@ -73,19 +73,40 @@
       "categoryId": 1
     },
     {
+      "name": "Hazelnut Frappuccino",
+      "description": "Coffee blended with toffee nut syrup, milk and ice. Topped with hazelnut drizzle.",
+      "price": "54000",
+      "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648475850.jpg",
+      "authorId": "1",
+      "categoryId": "1",
       "id": 10
     },
     {
+      "name": "Signature Chocolate",
+      "description": "Chocolate and dairy milk, steamed together to create a hot chocolate fit for a chocaholic! Topped with whipped cream and dusted with cocoa.",
+      "price": "56000",
+      "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648480637.jpg",
+      "authorId": "1",
+      "categoryId": "1",
       "id": 11
     },
     {
+      "name": "Grilled Smoked Beef & Cheese Decker",
+      "description": "A staple Toastie grilled sandwich with Beef & Cheese filling",
+      "price": "52000",
+      "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648778144.jpg",
+      "authorId": "1",
+      "categoryId": "2",
       "id": 12
     },
     {
+      "name": "Trio Mixed Roll",
+      "description": "Three types of Dinner Rolls with Tuna, Omelette and Chicken filling",
+      "price": "50000",
+      "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648777133.jpg",
+      "authorId": "1",
+      "categoryId": "2",
       "id": 13
-    },
-    {
-      "id": 14
     }
   ],
   "Category": [
@@ -100,6 +121,10 @@
     {
       "id": 3,
       "name": "MERCHANDISE"
+    },
+    {
+      "name": "TEA",
+      "id": 4
     }
   ],
   "Ingredients": [
@@ -117,6 +142,16 @@
       "id": 3,
       "itemId": 3,
       "name": "coffee, milk, caramel"
+    }
+  ],
+  "User": [
+    {
+      "id": 1,
+      "username": "admin",
+      "email": "admin@mail.com",
+      "password": 12345,
+      "phoneNumber": "08123456789",
+      "address": "Jl.Admin"
     }
   ]
 }

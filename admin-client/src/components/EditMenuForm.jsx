@@ -1,8 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { editMenu } from "../store/action/actionCreator";
+import { useDispatch } from "react-redux";
 
 export default function EditMenuForm() {
-  const [addForm, setAddForm] = useState({
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [editForm, setEditForm] = useState({
     name: "",
     description: "",
     price: "",
@@ -14,17 +18,22 @@ export default function EditMenuForm() {
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setAddForm({
-      ...addForm,
+    setEditForm({
+      ...editForm,
       [name]: value,
     });
   };
 
-  const handleSubmit = async (e) => {
-    await fetch("http://localhost:3000/items", {
-      method: "post",
-    });
+  const handleSubmit = async (e, id) => {
     e.preventDefault();
+    await fetch(`http://localhost:3000/items/${id}`, {
+      method: "put",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...editForm,
+      }),
+    });
+    navigate("/");
   };
 
   return (
@@ -42,7 +51,7 @@ export default function EditMenuForm() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="name"
-              value={addForm.name}
+              value={editForm.name}
               onChange={handleChange}
             />
           </div>
@@ -54,7 +63,7 @@ export default function EditMenuForm() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="description"
-              value={addForm.description}
+              value={editForm.description}
               onChange={handleChange}
             />
           </div>
@@ -66,7 +75,7 @@ export default function EditMenuForm() {
               type="number"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="price"
-              value={addForm.price}
+              value={editForm.price}
               onChange={handleChange}
             />
           </div>
@@ -78,7 +87,7 @@ export default function EditMenuForm() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="imgUrl"
-              value={addForm.imgUrl}
+              value={editForm.imgUrl}
               onChange={handleChange}
             />
           </div>
@@ -90,7 +99,7 @@ export default function EditMenuForm() {
               type="text"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="authorId"
-              value={addForm.authorId}
+              value={editForm.authorId}
               onChange={handleChange}
             />
           </div>
@@ -102,7 +111,7 @@ export default function EditMenuForm() {
               type="select"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="categoryId"
-              value={addForm.categoryId}
+              value={editForm.categoryId}
               onChange={handleChange}
             />
           </div>
@@ -111,10 +120,10 @@ export default function EditMenuForm() {
               type="submit"
               className="w-full  hover:scale-105 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-800 rounded-md hover:bg-green-800 focus:outline-none focus:bg-green-800"
             >
-              <Link to="/">Edit</Link>
+              Edit
             </button>
             <button className="w-full mt-3 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-400 rounded-md hover:bg-green-800 focus:outline-none focus:bg-green-800">
-              Cancel
+              <Link to={"/"}>Cancel</Link>
             </button>
           </div>
         </form>

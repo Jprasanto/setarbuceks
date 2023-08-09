@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function RegisAdmForm() {
   const [regisForm, setRegisForm] = useState({
     username: "",
     email: "",
     password: "",
+    phoneNumber: "",
+    address: ""
   });
 
   const handleChange = (e) => {
@@ -95,7 +98,9 @@ export default function RegisAdmForm() {
               Register
             </button>
             <button className="w-full mt-3 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-gray-400 rounded-md hover:bg-green-800 focus:outline-none focus:bg-green-800">
-              Cancel
+              <Link to={"/"}>
+                Cancel
+              </Link>
             </button>
           </div>
         </form>
