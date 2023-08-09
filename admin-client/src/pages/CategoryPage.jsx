@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import useFetch from "../hooks/useFetch";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchCategory } from "../store/action/actionCreator";
 
 export default function CategoryPage() {
-  const { loading, item: categories } = useFetch(
-    "http://localhost:3000/category"
-  );
+  const dispatch = useDispatch()
+  const { category: categories, categoryLoading: loading } = useSelector((state) => { return state.category })
+  useEffect(() => {
+    dispatch(fetchCategory())
+  }, [])
 
   return (
     <>
@@ -55,7 +58,6 @@ export default function CategoryPage() {
                             onClick={() => handleDelete(e.id)}
                             className="border p-1 rounded bg-green-800 text-white  hover:scale-125"
                           >
-                            {" "}
                             Delete
                           </button>
                         </td>

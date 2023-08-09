@@ -1,23 +1,32 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addCategory } from "../store/action/actionCreator";
 
 export default function AddCategoryForm() {
-  const [loginForm, setLoginForm] = useState({
-    email: "",
-    password: "",
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [categoryForm, setCategoryForm] = useState({
+    name: "",
   });
 
   const handleChange = (e) => {
     const { value, name } = e.target;
 
-    setLoginForm({
-      ...loginForm,
+    setCategoryForm({
+      ...categoryForm,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await dispatch(addCategory(categoryForm))
+      navigate('/category')
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (
@@ -32,10 +41,10 @@ export default function AddCategoryForm() {
               Name
             </label>
             <input
-              type="email"
+              type="text"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
-              name="email"
-              value={loginForm.email}
+              name="name"
+              value={categoryForm.name}
               onChange={handleChange}
             />
           </div>

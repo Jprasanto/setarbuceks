@@ -1,9 +1,18 @@
-import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import useFetch from "../hooks/useFetch";
+import { fetchMenu, deleteMenu } from "../store/action/actionCreator";
+import { useEffect } from "react";
+
+// import useFetch from "../hooks/useFetch";
 
 export default function MenuPage() {
-  const { loading, item: menu } = useFetch("http://localhost:3000/items");
+  // const { loading, item: menu } = useFetch("http://localhost:3000/items");
+
+  const { menus: menu, menuLoading: loading } = useSelector((state) => { return state.menu })
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMenu());
+  }, []);
 
   return (
     <>
@@ -36,7 +45,7 @@ export default function MenuPage() {
                       </button>
                     </div>
                     <div>
-                      <button className="border p-1 rounded bg-green-800 text-white  hover:scale-125">
+                      <button onClick={() => dispatch(deleteMenu(e.id))} className="border p-1 rounded bg-green-800 text-white  hover:scale-125">
                         Delete
                       </button>
                     </div>
