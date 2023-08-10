@@ -59,7 +59,7 @@ export function fetchMenu() {
       dispatch(fetchMenuLoading(true));
       const response = await fetch(API_URL + "/items");
       const responseJSON = await response.json();
-      dispatch(fetchMenuSuccess(responseJSON));
+      dispatch(fetchMenuSuccess(responseJSON.message));
     } catch (error) {
       throw error;
     } finally {
@@ -89,9 +89,9 @@ export function fetchCategory() {
     // you can use api here
     try {
       dispatch(fetchCategoryLoading(true));
-      const response = await fetch(API_URL + "/Category");
+      const response = await fetch(API_URL + "/categories");
       const responseJSON = await response.json();
-      dispatch(fetchCategorySuccess(responseJSON));
+      dispatch(fetchCategorySuccess(responseJSON.categories));
     } catch (error) {
       throw error;
     } finally {
@@ -104,7 +104,7 @@ export function addCategory(payload) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch("http://localhost:3000/Category", {
+      await fetch("http://localhost:3000/categories", {
         method: "post",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -144,12 +144,27 @@ export function addAdmin(payload) {
     }
   };
 }
+//delete category
+export function deleteCategory(id) {
+  return async (dispatch, getState) => {
+    try {
+      const state = getState();
+      await fetch(`http://localhost:3000/categories/${id}`, {
+        method: "delete",
+        // headers: { access_token }
+      });
+      dispatch(fetchCategory())
+    } catch (error) {
+      throw error;
+    }
+  };
+}
 //edit menu
 export function editMenu(id) {
   return async (dispatch, getState) => {
     try {
       dispatch(fetchMenuLoading(true));
-      const response = await fetch(API_URL + `/items${id}`);
+      const response = await fetch(API_URL + `/items/${id}`);
       const responseJSON = await response.json();
       dispatch(fetchMenuSuccess(responseJSON));
     } catch (error) {

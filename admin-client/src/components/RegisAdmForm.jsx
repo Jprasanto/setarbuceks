@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { addAdmin } from "../store/action/actionCreator";
+import { useDispatch } from "react-redux";
 
 export default function RegisAdmForm() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [regisForm, setRegisForm] = useState({
     username: "",
     email: "",
@@ -19,8 +23,14 @@ export default function RegisAdmForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await dispatch(addAdmin(regisForm))
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCategory } from "../store/action/actionCreator";
+import { deleteCategory, fetchCategory } from "../store/action/actionCreator";
 
 export default function CategoryPage() {
   const dispatch = useDispatch()
   const { category: categories, categoryLoading: loading } = useSelector((state) => { return state.category })
+  console.log(categories, "<><>")
   useEffect(() => {
     dispatch(fetchCategory())
   }, [])
@@ -41,7 +42,7 @@ export default function CategoryPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {categories.map((category) => {
+                  {categories?.map((category) => {
                     return (
                       <tr
                         key={category.id}
@@ -55,7 +56,7 @@ export default function CategoryPage() {
                         </td>
                         <td className="content-center">
                           <button
-                            onClick={() => handleDelete(e.id)}
+                            onClick={() => dispatch(deleteCategory(category.id))}
                             className="border p-1 rounded bg-green-800 text-white  hover:scale-125"
                           >
                             Delete

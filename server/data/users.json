@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "username": "superadmin",
+    "email": "superadmin@mail.com",
+    "password": "12345",
+    "role": "SuperAdmin",
+    "phoneNumber": "08123456789",
+    "address": "Jl.Menuju Surga"
+  }
+]

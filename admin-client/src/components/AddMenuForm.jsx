@@ -11,7 +11,6 @@ export default function AddMenuForm() {
     description: "",
     price: "",
     imgUrl: "",
-    authorId: "",
     categoryId: "",
   });
 
@@ -86,18 +85,6 @@ export default function AddMenuForm() {
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="imgUrl"
               value={addForm.imgUrl}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="mb-2">
-            <label className="block text-sm font-semibold text-gray-800">
-              AuthorId
-            </label>
-            <input
-              type="text"
-              className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
-              name="authorId"
-              value={addForm.authorId}
               onChange={handleChange}
             />
           </div>
