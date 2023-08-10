@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Caffe Latte",
+    "description": "Rich, full-bodied espresso in steamed milk, lightly topped with foam. A caffè latte is simply a shot or two of bold, tasty espresso with fresh, sweet steamed milk over it.",
+    "price": 48000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177502.jpg",
+    "authorId": 1,
+    "categoryId": 1
+  },
+  {
+    "id": 2,
+    "name": "Cappuccino",
+    "description": "Espresso with steamed milk, topped with a deep layer of foam.",
+    "price": 48000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177603.jpg",
+    "authorId": 1,
+    "categoryId": 1
+  },
+  {
+    "id": 3,
+    "name": "Caramel Macchiato",
+    "description": "Espresso combined with vanilla-flavoured syrup, milk and caramel sauce over ice.",
+    "price": 61000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177837.jpg",
+    "authorId": 1,
+    "categoryId": 1
+  },
+  {
+    "id": 4,
+    "name": "Caffè Americano",
+    "description": "HOT: Rich, full-bodied espresso with hot water.",
+    "price": 48000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648177928.jpg",
+    "authorId": 1,
+    "categoryId": 1
+  },
+  {
+    "id": 5,
+    "name": "Almond Croissant ",
+    "description": "Rich, almond flan enveloped in a croissant, then topped with sliced almonds. It's the perfect combination of sweet and savory.",
+    "price": 41000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648614514.jpg",
+    "authorId": 1,
+    "categoryId": 2
+  },
+  {
+    "id": 6,
+    "name": "7 Seeds Cookie",
+    "description": "Not your ordinary 7 Type Seeds mix in with a Peanut Butter Batter",
+    "price": 41000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648631786.jpg",
+    "authorId": 1,
+    "categoryId": 2
+  },
+  {
+    "id": 8,
+    "name": "Starbucks Tumbler Collection",
+    "description": "Starbucks Tumbler Etched Siren Black",
+    "price": 385000,
+    "imgUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2EZb96g-2_ivR9KpuZl3Dup3R-u0U4MrHGw&usqp=CAU",
+    "authorId": 1,
+    "categoryId": 3
+  },
+  {
+    "id": 9,
+    "name": "Double Chocolate Cream Frappuccino",
+    "description": "Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a blender bash. Top it off with sweetened whipped cream and mocha drizzle for a real party in your mouth.",
+    "price": 60000,
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648479028.jpg",
+    "authorId": 1,
+    "categoryId": 1
+  },
+  {
+    "name": "Hazelnut Frappuccino",
+    "description": "Coffee blended with toffee nut syrup, milk and ice. Topped with hazelnut drizzle.",
+    "price": "54000",
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648475850.jpg",
+    "authorId": "1",
+    "categoryId": "1",
+    "id": 10
+  },
+  {
+    "name": "Signature Chocolate",
+    "description": "Chocolate and dairy milk, steamed together to create a hot chocolate fit for a chocaholic! Topped with whipped cream and dusted with cocoa.",
+    "price": "56000",
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648480637.jpg",
+    "authorId": "1",
+    "categoryId": "1",
+    "id": 11
+  },
+  {
+    "name": "Grilled Smoked Beef & Cheese Decker",
+    "description": "A staple Toastie grilled sandwich with Beef & Cheese filling",
+    "price": "52000",
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648778144.jpg",
+    "authorId": "1",
+    "categoryId": "2",
+    "id": 12
+  },
+  {
+    "name": "Trio Mixed Roll",
+    "description": "Three types of Dinner Rolls with Tuna, Omelette and Chicken filling",
+    "price": "50000",
+    "imgUrl": "https://www.starbucks.co.id/storage/image/temporary/summernote_image_1648777133.jpg",
+    "authorId": "1",
+    "categoryId": "2",
+    "id": 13
+  }
+]
