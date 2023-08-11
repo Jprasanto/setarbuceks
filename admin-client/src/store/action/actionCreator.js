@@ -8,7 +8,6 @@ import {
   USERS_SUCCESS,
   USERS_LOADING,
 } from "./actionType";
-import { func } from "prop-types";
 
 export const fetchUserSuccess = (payload) => {
   return {
@@ -57,7 +56,12 @@ export function fetchMenu() {
     // you can use api here
     try {
       dispatch(fetchMenuLoading(true));
-      const response = await fetch(API_URL + "/items");
+      const response = await fetch(API_URL + "/items", {
+        method: "get",
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      });
       const responseJSON = await response.json();
       dispatch(fetchMenuSuccess(responseJSON.message));
     } catch (error) {
@@ -74,7 +78,10 @@ export function addMenu(payload) {
       const state = getState();
       await fetch("http://localhost:3000/items", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token")
+        },
         body: JSON.stringify(payload),
       });
     } catch (error) {
@@ -89,7 +96,12 @@ export function fetchCategory() {
     // you can use api here
     try {
       dispatch(fetchCategoryLoading(true));
-      const response = await fetch(API_URL + "/categories");
+      const response = await fetch(API_URL + "/categories", {
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem("access_token")
+        }
+      });
       const responseJSON = await response.json();
       dispatch(fetchCategorySuccess(responseJSON.categories));
     } catch (error) {
@@ -104,9 +116,12 @@ export function addCategory(payload) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch("http://localhost:3000/categories", {
+      await fetch("http://localhost:3000/categories/add", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token")
+        },
         body: JSON.stringify(payload),
       });
     } catch (error) {
@@ -121,7 +136,7 @@ export function deleteMenu(id) {
       const state = getState();
       await fetch(`http://localhost:3000/items/${id}`, {
         method: "delete",
-        // headers: { access_token }
+        headers: { access_token: localStorage.getItem("access_token") }
       });
       dispatch(fetchMenu())
     } catch (error) {
@@ -134,9 +149,12 @@ export function addAdmin(payload) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch("http://localhost:3000/User", {
+      await fetch("http://localhost:3000/adm-register", {
         method: "post",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token")
+        },
         body: JSON.stringify(payload),
       });
     } catch (error) {
@@ -151,7 +169,7 @@ export function deleteCategory(id) {
       const state = getState();
       await fetch(`http://localhost:3000/categories/${id}`, {
         method: "delete",
-        // headers: { access_token }
+        headers: { access_token: localStorage.getItem("access_token") }
       });
       dispatch(fetchCategory())
     } catch (error) {
@@ -159,7 +177,7 @@ export function deleteCategory(id) {
     }
   };
 }
-//edit menu
+//edit menu masih fail
 export function editMenu(id) {
   return async (dispatch, getState) => {
     try {
@@ -173,5 +191,21 @@ export function editMenu(id) {
       dispatch(fetchMenuLoading(false));
     }
   };
+}
+// login
+export function login(payload) {
+  return async (dispatch, getState) => {
+    try {
+      const response = await fetch(API_URL + '/login', {
+        method: 'post',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+      const responseJSON = await response.json()
+      localStorage.setItem("access_token", responseJSON.access_token)
+    } catch (err) {
+      throw err
+    }
+  }
 }
 

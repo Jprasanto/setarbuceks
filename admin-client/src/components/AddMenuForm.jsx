@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addMenu } from "../store/action/actionCreator";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCategory } from "../store/action/actionCreator";
 
 export default function AddMenuForm() {
   const navigate = useNavigate();
@@ -13,6 +14,8 @@ export default function AddMenuForm() {
     imgUrl: "",
     categoryId: "",
   });
+
+  const { category } = useSelector((state) => { return state.category })
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -32,6 +35,10 @@ export default function AddMenuForm() {
       console.log(err)
     }
   };
+
+  useEffect(() => {
+    dispatch(fetchCategory());
+  }, []);
 
   return (
     <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
@@ -92,14 +99,22 @@ export default function AddMenuForm() {
             <label className="block text-sm font-semibold text-gray-800">
               Category
             </label>
-            <input
+            <select
               type="select"
               className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
               name="categoryId"
-              value={addForm.categoryId}
+              defaultValue={addForm.categoryId}
               onChange={handleChange}
-            />
+            >
+              <option disabled>Select Category</option>
+              {category?.map((e) => (
+                <option key={e.id} defaultValue={`${e.name}`}>{e.name}</option>
+              )
+              )}
+            </select>
           </div>
+
+
 
           <div className="mt-6">
             <button

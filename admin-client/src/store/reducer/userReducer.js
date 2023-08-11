@@ -2,7 +2,7 @@ import { USERS_SUCCESS, USERS_LOADING } from "../action/actionType";
 
 const initialState = {
     users: [],
-    usersLoading: false,
+    usersLoading: false
 };
 
 const userReducer = (state = initialState, action) => {

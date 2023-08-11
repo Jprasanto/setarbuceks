@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteCategory, fetchCategory } from "../store/action/actionCreator";
+import RowTableCat from "../components/RowTableCat";
 
 export default function CategoryPage() {
   const dispatch = useDispatch()
   const { category: categories, categoryLoading: loading } = useSelector((state) => { return state.category })
-  console.log(categories, "<><>")
   useEffect(() => {
     dispatch(fetchCategory())
   }, [])
@@ -18,7 +18,6 @@ export default function CategoryPage() {
         <div className="justify-between flex mb-4">
           <h1 className="text-4xl mb-4">MENU</h1>
           <button
-            // onClick untuk add
             className="border p-1 pr-3 pl-3 rounded bg-green-800 text-white  hover:scale-125"
           >
             <Link to="/category/add">Add New Category</Link>
@@ -44,25 +43,7 @@ export default function CategoryPage() {
                 <tbody>
                   {categories?.map((category) => {
                     return (
-                      <tr
-                        key={category.id}
-                        className="border-b bg-neutral-100 dark:border-green-800"
-                      >
-                        <td className="whitespace-nowrap px-6 py-4 font-medium">
-                          {category.id}
-                        </td>
-                        <td className="whitespace-nowrap px-6 py-4">
-                          {category.name}
-                        </td>
-                        <td className="content-center">
-                          <button
-                            onClick={() => dispatch(deleteCategory(category.id))}
-                            className="border p-1 rounded bg-green-800 text-white  hover:scale-125"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
+                      <RowTableCat key={category.id} deleteCategory={deleteCategory} category={category} />
                     );
                   })}
                 </tbody>

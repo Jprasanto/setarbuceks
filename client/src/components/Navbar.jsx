@@ -1,7 +1,7 @@
 import React from "react";
 import imgUrl from "../assets/pngegg.png"
 
-export default function DropdownComponent() {
+export default function Navbar() {
     return (
         <div className="w-full h-16 bg-green-800 flex justify-between" >
             <div className="flex gap-3 text-white m-4 ">

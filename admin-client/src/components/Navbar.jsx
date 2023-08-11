@@ -1,8 +1,12 @@
 import React from "react";
 import imgUrl from "../assets/pngegg.png";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 export default function Navbar() {
+  const handleLogout = (e) => {
+    localStorage.clear()
+  }
+
   return (
     <div className="w-full h-12 bg-green-800 flex justify-between">
       <div className="flex gap-3 text-white m-3 ">
@@ -50,7 +54,9 @@ export default function Navbar() {
         </div>
       </div>
       <div className="flex text-white m-3 gap-3">
-        <div className="mr-4">Logout</div>
+        <Link to={'/adm-login'}>
+          <div className="mr-4" onClick={handleLogout}>Logout</div>
+        </Link>
       </div>
     </div>
   );
