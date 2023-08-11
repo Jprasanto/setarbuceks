@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { login } from "../store/action/actionCreator";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [loginForm, setLoginForm] = useState({
     email: "",
     password: "",
@@ -15,8 +20,14 @@ export default function LoginForm() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      await dispatch(login(loginForm))
+      navigate('/')
+    } catch (err) {
+      console.log(err)
+    }
   };
 
   return (

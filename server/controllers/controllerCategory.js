@@ -37,6 +37,25 @@ class Controller {
             next(err)
         }
     }
+    static async updateCategory(req, res, next) {
+        try {
+            const { name } = req.body
+            const { id } = req.params
+            const category = await Category.findByPk(id)
+            if (!category) throw { name: "error not found" }
+
+            await Category.update({ name }, {
+                where: {
+                    id
+                }
+            })
+            res.status(200).json({
+                category
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = Controller

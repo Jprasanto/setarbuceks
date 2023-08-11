@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, redirect } from "react-router-dom";
 import MenuPage from "../pages/MenuPage";
 import CategoryPage from "../pages/CategoryPage";
 import BaseLayout from "../layouts/BaseLayout";
@@ -7,11 +7,19 @@ import LoginForm from "../components/FormLogin";
 import AddMenuForm from "../components/AddMenuForm";
 import EditMenuForm from "../components/EditMenuForm";
 import AddCategoryForm from "../components/AddCategoryForm";
+import EditCategoryForm from "../components/EditCategoryForm";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <MenuPage />,
@@ -22,6 +30,13 @@ const router = createBrowserRouter([
   {
     path: "/category",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <CategoryPage />,
@@ -32,6 +47,13 @@ const router = createBrowserRouter([
   {
     path: "/adm-regis",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <RegisAdmForm />,
@@ -52,6 +74,13 @@ const router = createBrowserRouter([
   {
     path: "/add",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <AddMenuForm />,
@@ -62,6 +91,13 @@ const router = createBrowserRouter([
   {
     path: "/edit",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <EditMenuForm />,
@@ -72,9 +108,33 @@ const router = createBrowserRouter([
   {
     path: "/category/add",
     element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
     children: [
       {
         element: <AddCategoryForm />,
+        path: "",
+      },
+    ],
+  },
+  {
+    path: "/category/edit",
+    element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
+    children: [
+      {
+        element: <EditCategoryForm />,
         path: "",
       },
     ],
