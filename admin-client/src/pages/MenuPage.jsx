@@ -15,15 +15,18 @@ export default function MenuPage() {
   useEffect(() => {
     dispatch(fetchMenu());
   }, []);
-
+  if (loading) {
+    return (
+      <div className="text-4xl">Loading... </div>
+    )
+  }
   return (
     <>
-      <div>{loading && <div>Loading... </div>}</div>
       <div className="bg-white">
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
           <div className="justify-between flex mb-4">
             <h1 className="text-4xl mb-4">MENU</h1>
-            <button className="border p-1 pr-3 pl-3 rounded bg-green-800 text-white  hover:scale-125">
+            <button className="border p-1 pr-3 pl-3 rounded bg-green-800 text-white  hover:scale-110">
               <Link to="/add">Add New Menu</Link>
             </button>
           </div>

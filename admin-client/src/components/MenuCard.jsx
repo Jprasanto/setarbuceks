@@ -1,10 +1,14 @@
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux"
 
 const MenuCard = ({ deleteMenu, e }) => {
+    const dispatch = useDispatch()
     return (
         <div >
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
-                <img src={e.imgUrl} />
+                <Link to={`${e.id}`}>
+                    <img src={e.imgUrl} />
+                </Link>
             </div>
             <div className="flex-row">
                 <h3 className="mt-4 text-sm text-gray-700">{e.name}</h3>
@@ -15,7 +19,7 @@ const MenuCard = ({ deleteMenu, e }) => {
             <div className="flex justify-between mt-2">
                 <div>
                     <button className="border p-1 pl-3 pr-3 text-center rounded bg-green-800 text-white  hover:scale-125">
-                        <Link to="/edit">Edit</Link>
+                        <Link to={`/edit/${e.id}`}>Edit</Link>
                     </button>
                 </div>
                 <div>

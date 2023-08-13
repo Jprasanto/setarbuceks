@@ -4,6 +4,7 @@ const ControllerCategory = require('../controllers/controllerCategory')
 
 router.get('/', ControllerCategory.categoryList)
 router.post('/add', ControllerCategory.addCategory)
+router.get('/:id', ControllerCategory.getCategory)
 router.put('/:id', ControllerCategory.updateCategory)
 router.delete('/:id', ControllerCategory.deleteCategory)
 

@@ -1,7 +1,8 @@
-import { MENU_SUCCESS, MENU_LOADING } from "../action/actionType"
+import { MENU_SUCCESS, MENU_LOADING, MENU_DETAIL } from "../action/actionType"
 
 const initialState = {
     menus: [],
+    item: {},
     menuLoading: false
 };
 
@@ -16,6 +17,11 @@ const menuReducer = (state = initialState, action) => {
             return {
                 ...state,
                 menuLoading: action.payload
+            }
+        case MENU_DETAIL:
+            return {
+                ...state,
+                item: action.payload
             }
         default:
             return state

@@ -13,6 +13,7 @@ export default function AddMenuForm() {
     price: "",
     imgUrl: "",
     categoryId: "",
+    ingredients: []
   });
 
   const { category } = useSelector((state) => { return state.category })
@@ -28,6 +29,11 @@ export default function AddMenuForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    inputField.forEach(e => {
+      addForm.ingredients.push(e.ingredients)
+    })
+
     try {
       await dispatch(addMenu(addForm))
       navigate("/");
@@ -35,6 +41,25 @@ export default function AddMenuForm() {
       console.log(err)
     }
   };
+
+  const [inputField, setInputField] = useState([
+    { ingredients: '' }
+  ])
+  const handleFormChange = (index, event) => {
+    let data = [...inputField];
+    data[index][event.target.name] = event.target.value;
+    setInputField(data)
+  }
+  const addFields = () => {
+    let newfield = { ingredients: '' }
+
+    setInputField([...inputField, newfield])
+  }
+  const removeFields = (index) => {
+    let data = [...inputField];
+    data.splice(index, 1)
+    setInputField(data)
+  }
 
   useEffect(() => {
     dispatch(fetchCategory());
@@ -46,7 +71,7 @@ export default function AddMenuForm() {
         <h1 className="text-3xl font-semibold text-center text-green-800 underline">
           Add New Menu
         </h1>
-        <form className="mt-6" onSubmit={handleSubmit}>
+        <form className="mt-6" key={category.id} onSubmit={handleSubmit}>
           <div className="mb-2">
             <label className="block text-sm font-semibold text-gray-800">
               Name
@@ -108,24 +133,51 @@ export default function AddMenuForm() {
             >
               <option disabled>Select Category</option>
               {category?.map((e) => (
-                <option key={e.id} defaultValue={`${e.name}`}>{e.name}</option>
+                <option key={e.id} value={e.id}>{e.name}</option>
               )
               )}
             </select>
           </div>
 
-
-
+          <label className="block text-sm font-semibold text-gray-800">
+            Ingredients
+          </label>
+          {inputField.map((input, index) => {
+            return (
+              <div className="mb-2" key={index.id}>
+                <div className="flex gap-3" >
+                  <input
+                    form="ingredient"
+                    type="text"
+                    className="block w-full px-4 py-2 mt-2 text-green-800 bg-white border rounded-md focus:border-green-800 focus:ring-green-800 focus:outline-none focus:ring focus:ring-opacity-40"
+                    name="ingredients"
+                    value={input.ingredients}
+                    onChange={event => handleFormChange(index, event)}
+                  />
+                  <label
+                    className=" border px-4 py-2 mt-2 rounded hover:bg-green-800 hover:text-white hover:scale-125"
+                    onClick={addFields}>
+                    +
+                  </label>
+                  <label
+                    className=" border px-4 py-2 mt-2 rounded hover:bg-green-800 hover:text-white hover:scale-125"
+                    onClick={() => removeFields(index)}>
+                    -
+                  </label>
+                </div>
+              </div>
+            )
+          })}
           <div className="mt-6">
             <button
               type="submit"
-              className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-800 rounded-md hover:bg-green-800 focus:outline-none focus:bg-green-800"
+              className="w-full hover:scale-110 px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-green-800 rounded-md hover:bg-green-800 focus:outline-none focus:bg-green-800"
             >
               ADD MENU
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
