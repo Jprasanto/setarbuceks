@@ -8,6 +8,7 @@ import AddMenuForm from "../components/AddMenuForm";
 import EditMenuForm from "../components/EditMenuForm";
 import AddCategoryForm from "../components/AddCategoryForm";
 import EditCategoryForm from "../components/EditCategoryForm";
+import MenuDetail from "../pages/MenuDetail";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,23 @@ const router = createBrowserRouter([
     children: [
       {
         element: <MenuPage />,
+        path: "",
+      },
+    ],
+  },
+  {
+    path: "/:id",
+    element: <BaseLayout />,
+    loader: () => {
+      const token = localStorage.getItem("access_token")
+      if (!token) {
+        throw redirect('/adm-login')
+      }
+      return null
+    },
+    children: [
+      {
+        element: <MenuDetail />,
         path: "",
       },
     ],
@@ -89,7 +107,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/edit",
+    path: "/edit/:id",
     element: <BaseLayout />,
     loader: () => {
       const token = localStorage.getItem("access_token")
@@ -123,7 +141,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/category/edit",
+    path: "/category/edit/:id",
     element: <BaseLayout />,
     loader: () => {
       const token = localStorage.getItem("access_token")

@@ -22,6 +22,7 @@ class Controller {
     static async addMenu(req, res, next) {
         const trx = await sequelize.transaction();
         try {
+
             const { name, description, price, stock, imgUrl, categoryId, ingredients = [] } = req.body
             const slug = generateSlug(name)
             const createdMenu = await Item.create({ name, slug, description, price, stock, imgUrl, categoryId, authorId: req.user.id, }, { transaction: trx })
@@ -41,6 +42,7 @@ class Controller {
             })
 
         } catch (err) {
+            console.log(err)
             await trx.rollback()
             next(err)
         }

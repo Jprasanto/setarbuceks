@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { useDispatch } from "react-redux";
+
 
 const RowTableCat = ({ deleteCategory, category }) => {
+    const dispatch = useDispatch()
     return (
         <tr
             className="border-b bg-neutral-100 dark:border-green-800"
@@ -21,7 +24,7 @@ const RowTableCat = ({ deleteCategory, category }) => {
                 <button
                     className="border pr-2 pl-2 p-1 ml-3 rounded bg-green-800 text-white  hover:scale-125"
                 >
-                    <Link to={'/category/edit'} >
+                    <Link to={`/category/edit/${category.id}`} >
                         Edit
                     </Link>
                 </button>

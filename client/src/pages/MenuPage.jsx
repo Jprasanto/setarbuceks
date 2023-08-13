@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom'
+import Footer from '../components/Footer'
+
 export default function MenuPage() {
     return (
         <>
@@ -8,7 +11,9 @@ export default function MenuPage() {
                             <p className="font-extrabold mb-8 text-xl text-white">DELICIOUS, HANDCRAFTED BEVERAGES AND GREAT-TASTING FOOD.</p>
                             <p className="text-white">It’s true. The perfect cup of coffee and a wholesome, delicious meal or snack can make your day. So we make sure everything you choose is of the finest quality. Because really, isn’t that how life should be?</p>
                             <button className="mt-8 flex gap-2 border-2 p-2 font-bold text-white rounded">
-                                Explore More &gt;&gt;
+                                <Link to='/menu/detail' >
+                                    Explore More &gt;&gt;
+                                </Link>
                             </button>
                         </div>
                         <div className="m-auto w-[450px]">
@@ -25,7 +30,10 @@ export default function MenuPage() {
                             <p className="font-extrabold text-xl mb-8 text-white">STARBUCKS BEVERAGES</p>
                             <p className="text-white">Amazing coffees from around the world. Handcrafted beverages to discover and enjoy. We love bringing you these things.  Elevate your moments with the Starbucks Beverage Symphony – a sip, a symphony, a story.</p>
                             <button className="mt-6 flex gap-2 border-2 p-2 font-bold text-white rounded">
-                                Explore More &gt;&gt;
+                                <Link to='/menu/detail' >
+                                    Explore More &gt;&gt;
+                                </Link>
+
                             </button>
                         </div>
                     </div>
@@ -37,7 +45,9 @@ export default function MenuPage() {
 
                             <p className="text-white">Elevate your coffee experience with our exclusive range of stylish and functional products, designed to complement your daily brew.Show your passion for exceptional coffee and timeless design with Starbucks Merchandise – it's more than just a collection; it's a statement of your coffee devotion. </p>
                             <button className="mt-6 flex gap-2 border-2 p-2 font-bold text-white rounded">
-                                Explore More &gt;&gt;
+                                <Link to='/menu/detail' >
+                                    Explore More &gt;&gt;
+                                </Link>
                             </button>
                         </div>
                         <div className="m-auto w-[450px]">
@@ -45,6 +55,9 @@ export default function MenuPage() {
                         </div>
                     </div>
                 </div>
+            </div>
+            <div>
+                <Footer />
             </div>
         </>
     )

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { login } from "../store/action/actionCreator";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function LoginForm() {
   const dispatch = useDispatch()
@@ -25,8 +26,10 @@ export default function LoginForm() {
     try {
       await dispatch(login(loginForm))
       navigate('/')
+      toast.success('🦄 Wow so easy!')
     } catch (err) {
       console.log(err)
+      toast.error(err.message || 'Internal Server Error')
     }
   };
 

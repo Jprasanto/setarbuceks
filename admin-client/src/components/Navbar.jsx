@@ -1,10 +1,12 @@
 import React from "react";
 import imgUrl from "../assets/pngegg.png";
 import { NavLink, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 export default function Navbar() {
   const handleLogout = (e) => {
     localStorage.clear()
+    toast.success(`See you later !`)
   }
 
   return (

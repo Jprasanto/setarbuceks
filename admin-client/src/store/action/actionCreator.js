@@ -7,7 +7,10 @@ import {
   MENU_SUCCESS,
   USERS_SUCCESS,
   USERS_LOADING,
+  CATEGORY_EDITPAGE,
+  MENU_DETAIL,
 } from "./actionType";
+import { toast } from 'react-toastify';
 
 export const fetchUserSuccess = (payload) => {
   return {
@@ -28,7 +31,12 @@ export const fetchMenuSuccess = (payload) => {
     payload,
   };
 };
-
+export const fetchItem = (payload) => {
+  return {
+    type: MENU_DETAIL,
+    payload,
+  };
+};
 export const fetchMenuLoading = (payload) => {
   return {
     type: MENU_LOADING,
@@ -41,7 +49,12 @@ export const fetchCategorySuccess = (payload) => {
     payload,
   };
 };
-
+export const fetchEditCategorySuccess = (payload) => {
+  return {
+    type: CATEGORY_EDITPAGE,
+    payload,
+  };
+};
 export const fetchCategoryLoading = (payload) => {
   return {
     type: CATEGORY_LOADING,
@@ -104,10 +117,10 @@ export function fetchCategory() {
       });
       const responseJSON = await response.json();
       dispatch(fetchCategorySuccess(responseJSON.categories));
+      dispatch(fetchCategoryLoading(false));
     } catch (error) {
       throw error;
     } finally {
-      dispatch(fetchCategoryLoading(false));
     }
   };
 }
@@ -115,6 +128,7 @@ export function fetchCategory() {
 export function addCategory(payload) {
   return async (dispatch, getState) => {
     try {
+      dispatch(fetchCategoryLoading(true));
       const state = getState();
       await fetch("http://localhost:3000/categories/add", {
         method: "post",
@@ -126,6 +140,8 @@ export function addCategory(payload) {
       });
     } catch (error) {
       throw error;
+    } finally {
+      dispatch(fetchCategoryLoading(false));
     }
   };
 }
@@ -139,6 +155,7 @@ export function deleteMenu(id) {
         headers: { access_token: localStorage.getItem("access_token") }
       });
       dispatch(fetchMenu())
+      toast.success(`menu id ${id} has been deleted`)
     } catch (error) {
       throw error;
     }
@@ -157,8 +174,10 @@ export function addAdmin(payload) {
         },
         body: JSON.stringify(payload),
       });
+      toast.success(`New Admin has been created`)
     } catch (error) {
       throw error;
+      toast.error(error.message)
     }
   };
 }
@@ -172,20 +191,50 @@ export function deleteCategory(id) {
         headers: { access_token: localStorage.getItem("access_token") }
       });
       dispatch(fetchCategory())
+      toast.success(`category id ${id} has been deleted`)
     } catch (error) {
       throw error;
     }
   };
 }
 //edit menu masih fail
-export function editMenu(id) {
+export function editMenu(id, product) {
   return async (dispatch, getState) => {
     try {
       dispatch(fetchMenuLoading(true));
-      const response = await fetch(API_URL + `/items/${id}`);
+      const response = await fetch(API_URL + `/items/${id}`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(product),
+      });
       const responseJSON = await response.json();
       dispatch(fetchMenuSuccess(responseJSON));
     } catch (error) {
+      throw error;
+    } finally {
+      dispatch(fetchMenuLoading(false));
+    }
+  };
+}
+//edit category
+export function editCategory(id, category) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(fetchMenuLoading(true));
+      const response = await fetch(API_URL + `/categories/${id}`, {
+        method: "put",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token"),
+        },
+        body: JSON.stringify(category),
+      });
+      dispatch(fetchCategory())
+    } catch (error) {
+      console.log(error)
       throw error;
     } finally {
       dispatch(fetchMenuLoading(false));
@@ -208,4 +257,46 @@ export function login(payload) {
     }
   }
 }
+// get product detail
+export function getDetailMenu(id) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(fetchMenuLoading(true));
+      const response = await fetch(API_URL + `/items/${id}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      const responseJSON = await response.json();
+      dispatch(fetchItem(responseJSON.message));
+    } catch (error) {
+      throw error;
+    } finally {
+      dispatch(fetchMenuLoading(false));
+    }
+  };
+}
 
+export function getDetailCategory(id) {
+  return async (dispatch, getState) => {
+    try {
+      dispatch(fetchCategoryLoading(true));
+      const response = await fetch(API_URL + `/categories/${id}`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          access_token: localStorage.getItem("access_token"),
+        },
+      });
+      const responseJSON = await response.json();
+      // console.log(responseJSON, "<<<")
+      dispatch(fetchEditCategorySuccess(responseJSON));
+    } catch (error) {
+      throw error;
+    } finally {
+      dispatch(fetchCategoryLoading(false));
+    }
+  };
+}

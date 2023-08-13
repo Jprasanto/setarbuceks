@@ -56,6 +56,18 @@ class Controller {
             next(err)
         }
     }
+    static async getCategory(req, res, next) {
+        try {
+            const { id } = req.params
+            const category = await Category.findByPk(id)
+            if (!category) throw { name: "error not found" }
+            res.status(200).json({
+                message: category
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
 }
 
 module.exports = Controller
