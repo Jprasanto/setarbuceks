@@ -45,11 +45,8 @@ export function fetchMenu() {
         // you can use api here
         try {
             dispatch(fetchMenuLoading(true));
-            const response = await fetch(API_URL + "/items", {
+            const response = await fetch(API_URL + "/menu", {
                 method: "get",
-                headers: {
-                    access_token: localStorage.getItem("access_token")
-                }
             });
             const responseJSON = await response.json();
             dispatch(fetchMenuSuccess(responseJSON.message));
@@ -65,12 +62,8 @@ export function getDetailMenu(id) {
     return async (dispatch, getState) => {
         try {
             dispatch(fetchMenuLoading(true));
-            const response = await fetch(API_URL + `/items/${id}`, {
+            const response = await fetch(API_URL + `/menu/${id}`, {
                 method: "get",
-                headers: {
-                    "Content-Type": "application/json",
-                    access_token: localStorage.getItem("access_token"),
-                },
             });
             const responseJSON = await response.json();
             dispatch(fetchItem(responseJSON.message));
@@ -86,12 +79,8 @@ export function getDetailCategory(id) {
     return async (dispatch, getState) => {
         try {
             dispatch(fetchCategoryLoading(true));
-            const response = await fetch(API_URL + `/categories/${id}`, {
+            const response = await fetch(API_URL + `/pub/category/${id}`, {
                 method: "get",
-                headers: {
-                    "Content-Type": "application/json",
-                    access_token: localStorage.getItem("access_token"),
-                },
             });
             const responseJSON = await response.json();
             // console.log(responseJSON, "<<<")

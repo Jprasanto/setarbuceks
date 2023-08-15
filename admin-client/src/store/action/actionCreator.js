@@ -89,7 +89,7 @@ export function addMenu(payload) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch("http://localhost:3000/items", {
+      await fetch("https://setarbuceks.joniprasanto.com/items", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -130,7 +130,7 @@ export function addCategory(payload) {
     try {
       dispatch(fetchCategoryLoading(true));
       const state = getState();
-      await fetch("http://localhost:3000/categories/add", {
+      await fetch("https://setarbuceks.joniprasanto.com/categories/add", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -150,7 +150,7 @@ export function deleteMenu(id) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch(`http://localhost:3000/items/${id}`, {
+      await fetch(`https://setarbuceks.joniprasanto.com/items/${id}`, {
         method: "delete",
         headers: { access_token: localStorage.getItem("access_token") }
       });
@@ -166,7 +166,7 @@ export function addAdmin(payload) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch("http://localhost:3000/adm-register", {
+      await fetch("https://setarbuceks.joniprasanto.com/adm-register", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -186,7 +186,7 @@ export function deleteCategory(id) {
   return async (dispatch, getState) => {
     try {
       const state = getState();
-      await fetch(`http://localhost:3000/categories/${id}`, {
+      await fetch(`https://setarbuceks.joniprasanto.com/categories/${id}`, {
         method: "delete",
         headers: { access_token: localStorage.getItem("access_token") }
       });
